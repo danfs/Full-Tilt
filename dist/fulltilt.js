@@ -102,7 +102,6 @@ function SensorCheck(sensorRootObj) {
 
 ////// Internal Event Handlers //////
 
-
 function handleScreenOrientationChange () {
 
 	if ( hasScreenOrientationAPI ) {
@@ -118,17 +117,17 @@ function handleScreenOrientationChange () {
 }
 
 function handleDeviceOrientationChange ( event ) {
-		if (event.absolute === true) {
-			orientationChangeAbsolute = true;
-		}
-		if (event.absolute == orientationChangeAbsolute) {
-			sensors.orientation.data = event;
+	if (event.absolute === true) {
+        orientationChangeAbsolute = true;
+    }
+    if (event.absolute == orientationChangeAbsolute) {
+        sensors.orientation.data = event;
 
-			// Fire every callback function each time deviceorientation is updated
-			for ( var i in sensors.orientation.callbacks ) {
-				sensors.orientation.callbacks[ i ].call( this );
-			}
-		}
+        // Fire every callback function each time deviceorientation is updated
+        for (var i in sensors.orientation.callbacks) {
+            sensors.orientation.callbacks[i].call(this);
+        }
+    }
 }
 
 function handleDeviceMotionChange ( event ) {
@@ -143,6 +142,7 @@ function handleDeviceMotionChange ( event ) {
 	}
 
 }
+
 
 ///// FULLTILT API Root Object /////
 
@@ -932,9 +932,9 @@ FULLTILT.DeviceOrientation = function (options) {
 	this.options = options || {}; // by default use UA deviceorientation 'type' ("game" on iOS, "world" on Android)
 
 	var tries = 0;
-	var maxTries = 200;
+	var maxTries = 1000;
 	var successCount = 0;
-	var successThreshold = 10;
+	var successThreshold = 1000;
 
 	this.alphaOffsetScreen = 0;
 	this.alphaOffsetDevice = undefined;
@@ -1031,7 +1031,6 @@ FULLTILT.DeviceOrientation.prototype = {
 	stop: function () {
 
 		if ( sensors.orientation.active ) {
-
 			window.removeEventListener( 'deviceorientationabsolute', handleDeviceOrientationChange, false );
 			window.removeEventListener( 'deviceorientation', handleDeviceOrientationChange, false );
 

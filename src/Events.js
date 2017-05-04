@@ -15,16 +15,17 @@ function handleScreenOrientationChange () {
 }
 
 function handleDeviceOrientationChange ( event ) {
-	if (event.absolute) {
-		sensors.orientation.data = event;
+	if (event.absolute === true) {
+        orientationChangeAbsolute = true;
+    }
+    if (event.absolute == orientationChangeAbsolute) {
+        sensors.orientation.data = event;
 
-		// Fire every callback function each time deviceorientation is updated
-		for ( var i in sensors.orientation.callbacks ) {
-
-			sensors.orientation.callbacks[ i ].call( this );
-
-		}
-	}
+        // Fire every callback function each time deviceorientation is updated
+        for (var i in sensors.orientation.callbacks) {
+            sensors.orientation.callbacks[i].call(this);
+        }
+    }
 }
 
 function handleDeviceMotionChange ( event ) {

@@ -21,6 +21,8 @@ if ( window.FULLTILT !== undefined && window.FULLTILT !== null ) {
 	return;
 }
 
+var orientationChangeAbsolute = undefined;
+
 var M_PI   = Math.PI;
 var M_PI_2 = M_PI / 2;
 var M_2_PI = 2 * M_PI;
